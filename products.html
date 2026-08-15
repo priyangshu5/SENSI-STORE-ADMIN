@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - SENSI 444 Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <nav class="sidebar glass">
+            <div class="sidebar-logo"><img src="assets/logo.jpg" alt="Logo"><span>ADMIN 444</span></div>
+            <ul class="sidebar-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="orders.html">Orders/Payments</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Manage Products</h1>
+                <button class="btn-cyber" onclick="openProductModal()">+ Add Product</button>
+            </header>
+
+            <div class="table-container glass metal-border">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Badge</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content glass metal-border">
+            <span class="close-btn" onclick="closeProductModal()">&times;</span>
+            <h2 id="modal-title">Add Product</h2>
+            <input type="hidden" id="prod-id">
+            <input type="text" id="prod-name" class="cyber-input" placeholder="Product Name">
+            <input type="number" id="prod-price" class="cyber-input" placeholder="Price (₹)">
+            <textarea id="prod-desc" class="cyber-input" placeholder="Description"></textarea>
+            <textarea id="prod-features" class="cyber-input" placeholder="Features (comma separated)"></textarea>
+            <input type="text" id="prod-device" class="cyber-input" placeholder="Device Compatibility (e.g., Android/iOS)">
+            <input type="text" id="prod-category" class="cyber-input" placeholder="Category">
+            <input type="text" id="prod-badge" class="cyber-input" placeholder="Badge (e.g., HOT, NEW)">
+            <input type="text" id="prod-mediafire" class="cyber-input" placeholder="MediaFire Download Link">
+            
+            <label class="cyber-input" style="display:block;margin-bottom:10px;cursor:pointer;color:var(--silver);">
+                Upload Image <input type="file" id="prod-image" accept="image/*" style="display:none;">
+                <span id="file-name" style="float:right;color:var(--vivid-red);">No file selected</span>
+            </label>
+
+            <button class="btn-cyber full-width" onclick="saveProduct()">SAVE PRODUCT</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- CryptoJS placed right above products.js as requested -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script src="js/products.js"></script>
+    <script>
+        checkAdminAuth();
+        loadProducts();
+        document.getElementById('logout-btn').addEventListener('click', logout);
+        document.getElementById('prod-image').addEventListener('change', (e) => {
+            document.getElementById('file-name').innerText = e.target.files[0] ? e.target.files[0].name : 'No file selected';
+        });
+    </script>
+</body>
+</html>

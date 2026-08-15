@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users - SENSI 444 Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <nav class="sidebar glass">
+            <div class="sidebar-logo"><img src="assets/logo.jpg" alt="Logo"><span>ADMIN 444</span></div>
+            <ul class="sidebar-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html">Orders/Payments</a></li>
+                <li><a href="users.html" class="active">Users</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Registered Users</h1>
+            </header>
+            <div class="table-container glass metal-border">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User UID</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Joined</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/users.js"></script>
+    <script>
+        checkAdminAuth();
+        loadUsers();
+        document.getElementById('logout-btn').addEventListener('click', logout);
+    </script>
+</body>
+</html>

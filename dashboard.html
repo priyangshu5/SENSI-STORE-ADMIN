@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SENSI 444 Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <nav class="sidebar glass">
+            <div class="sidebar-logo">
+                <img src="assets/logo.jpg" alt="Logo">
+                <span>ADMIN 444</span>
+            </div>
+            <ul class="sidebar-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html">Orders/Payments</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span id="admin-email-display">Loading...</span>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card glass metal-border">
+                    <h3>Total Users</h3>
+                    <p class="stat-value" id="stat-users">0</p>
+                </div>
+                <div class="stat-card glass metal-border">
+                    <h3>Total Products</h3>
+                    <p class="stat-value" id="stat-products">0</p>
+                </div>
+                <div class="stat-card glass metal-border" style="border-color: #ffbf00;">
+                    <h3>Pending Approvals</h3>
+                    <p class="stat-value" id="stat-pending" style="color:#ffbf00;">0</p>
+                </div>
+                <div class="stat-card glass metal-border" style="border-color: var(--neon-green);">
+                    <h3>Total Revenue</h3>
+                    <p class="stat-value" id="stat-revenue" style="color:var(--neon-green);">₹0</p>
+                </div>
+            </div>
+
+            <div class="recent-orders">
+                <h2>Recent Orders</h2>
+                <div class="table-container glass metal-border">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Email</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-orders-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        checkAdminAuth();
+        loadDashboard();
+        document.getElementById('logout-btn').addEventListener('click', logout);
+    </script>
+</body>
+</html>

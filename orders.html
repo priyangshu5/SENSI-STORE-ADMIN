@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - SENSI 444 Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <nav class="sidebar glass">
+            <div class="sidebar-logo"><img src="assets/logo.jpg" alt="Logo"><span>ADMIN 444</span></div>
+            <ul class="sidebar-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html" class="active">Orders/Payments</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Payment Verifications</h1>
+                <div class="filter-buttons">
+                    <button class="btn-cyber" onclick="filterOrders('pending')">Pending</button>
+                    <button class="btn-google" onclick="filterOrders('approved')">Approved</button>
+                    <button class="btn-google" onclick="filterOrders('rejected')">Rejected</button>
+                </div>
+            </header>
+
+            <div class="table-container glass metal-border">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Proof</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Rejection Modal -->
+    <div id="reject-modal" class="modal">
+        <div class="modal-content glass metal-border" style="max-width:400px;">
+            <span class="close-btn" onclick="document.getElementById('reject-modal').style.display='none'">&times;</span>
+            <h2>Reject Payment</h2>
+            <input type="hidden" id="reject-order-id">
+            <textarea id="reject-reason" class="cyber-input" placeholder="Reason for rejection..."></textarea>
+            <button class="btn-cyber full-width" style="border-color:var(--vivid-red);color:var(--vivid-red);" onclick="confirmReject()">SUBMIT REJECTION</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/orders.js"></script>
+    <script>
+        checkAdminAuth();
+        loadOrders('pending');
+        document.getElementById('logout-btn').addEventListener('click', logout);
+    </script>
+</body>
+</html>

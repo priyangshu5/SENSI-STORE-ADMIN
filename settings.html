@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SENSI 444 Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <nav class="sidebar glass">
+            <div class="sidebar-logo"><img src="assets/logo.jpg" alt="Logo"><span>ADMIN 444</span></div>
+            <ul class="sidebar-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html">Orders/Payments</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Support Links</h1>
+            </header>
+            
+            <div class="settings-card glass metal-border" style="max-width:600px;padding:30px;">
+                <h3>Configure User Support</h3>
+                <input type="text" id="discord-link" class="cyber-input" placeholder="Discord Invite URL">
+                <input type="text" id="youtube-link" class="cyber-input" placeholder="YouTube Channel URL">
+                <button class="btn-cyber" onclick="saveSettings()">SAVE SETTINGS</button>
+            </div>
+        </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/settings.js"></script>
+    <script>
+        checkAdminAuth();
+        loadSettings();
+        document.getElementById('logout-btn').addEventListener('click', logout);
+    </script>
+</body>
+</html>
